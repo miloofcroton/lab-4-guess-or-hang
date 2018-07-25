@@ -3,7 +3,7 @@
 Create a word guessing game that:
 
 1. Randomly selects a word from a list of words
-1. Shown line blanks for each letter of the word
+1. Shows line blanks for each letter of the word that was selected
 1. Allows the users to enter one letter "guess" at a time.
     1. If the guess is correct, show all occurances of that letter in the word
     1. If the guess is incorrect, add a body part to the gallows
@@ -17,12 +17,13 @@ Create a word guessing game that:
 
 Your page needs to include the following parts:
 
-1. Gallows - displays the parts of the body as the user guesses incorrectly
+1. Gallows - displays the parts of the body as the user guesses incorrectly.
 2. Word to Guess - Blank lines for each letter in the word. Shows the letters when correctly guessed.
     * Because we haven't got to dynamic element creation, you will need as many letters as your longest word.
     * You can give an id like `letter-0`, `letter-1`, `letter-2`, etc. in order to address by index, i.e. 
     `document.getElementById('letter-' + i)`
-3. Guess Letter - An input and button for guessing a letter
+3. Guess Letter - A form with an input and button for guessing a letter. You can use `maxlength="1"` attribute on the input
+to limit to one letter and `required` attribute to require at least one letter
 4. Letters Guessed - A list of letters guessed so far (correct and incorrect)
 5. Number of Guesses - Shows how many total guesses have been made
 6. Message - A place to show messages (like win or lose)
@@ -42,16 +43,17 @@ Create a file `app.js` that exposes functions for running the game.
 Don't forget to include a script tag with `src` for this file.
 
 1. Create a `loadWord` function that
-    1. Gets a random integer between 0 (inclusive) and length of word (exclusive)
-    1. Selects the word from the array with that index and stores for use by the guess function (word 
+    1. Gets a random integer between 0 (inclusive) and length of words (exclusive)
+    1. Selects the word from the array with that index and store in a `word` variable for use by the guess function (`word` 
     will need to be scoped in way guess function can read.
     1. Set the visibility on the letters of the "Word to Guess" to hidden and fully hide 
-    (no line blank) any unused letter spaces. (You might not hide them initially so you can "see" that
-    word is loading correctly.
+    (no line blank) any unused letter spaces. (You might not hide them initially during development so you can "see" that
+    word is loading correctly. Otherwise, you will need to inspect with the Dev Tools)
 1. Create a `guess` function that
-    1. Is called by the click of the Guess Letter button
-    1. Reads the letter from the Guess Letter input
-    1. If '', alerts or messages user that letter is required
+    1. Is called by the submit of the Guess Letter form
+    1. Reads the letter from the Guess Letter input (either use form.elements, or directly reference the letter input by Id, as that is the only form control we care about).
+    1. If letter guess is not a-z or A-Z, alert or message (via results output) user that letter is required. (Hint:
+    you can use `.charCodeAt(0)` on your string value, or checkout regular expressions)
     1. Checks against letters already guessed and alerts or messages user that letter has already
     been guessed
     1. Otherwise:
@@ -65,11 +67,11 @@ Don't forget to include a script tag with `src` for this file.
             1. Add a body part to the gallows
             1. Check for lose condition (guesses count is max number of body parts)
         1. If win or lose condition:
-            1. message the user that they won or ~~died~~ lost
+            1. Message the user that they won or ~~died~~ lost
             1. Disable the Guess Letter button (button.disabled = true)
 1. Call 'loadWord()` to start things
             
-## Stretch Goal
+## Stretch Goals
 
 1. Add a play game button that calls load word.
 1. Keep track of wins and loses
