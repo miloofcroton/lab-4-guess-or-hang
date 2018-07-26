@@ -13,12 +13,43 @@
 
     <p>Welcome to the hangman game! Press the button to select a word.</p>
 
-    <p><button onclick="hangman()">
-        Start the game
-    </button></p>
+    <p><button onclick="hangman()">Start the game</button></p>
 
-    <section id="game-space"></section>
+    <table>
+        <tr>
+            <td id="letter-1"></td>
+            <td id="letter-2"></td>
+            <td id="letter-3"></td>
+            <td id="letter-4"></td>
+            <td id="letter-5"></td>
+            <td id="letter-6"></td>
+            <td id="letter-7"></td>
+            <td id="letter-8"></td>
+            <td id="letter-9"></td>
+            <td id="letter-10"></td>
+        </tr>
+    </table> 
 
+    <form id="letter-guess" onsubmit="return submitGuess()">
+        <input name="guess" require>
+        <button type="submit">Guess</button>
+    </form>
+
+    <table id="incorrect-letters">
+        <th>Incorrect Letters</th>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
 
     <script src="words.js"></script>
     <script src="app.js"></script>

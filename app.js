@@ -1,4 +1,4 @@
-/* exported hangman */
+/* exported hangman, submitGuess */
 /* globals wordList */
 
 
@@ -16,6 +16,12 @@ function hangman() {
 
     var gameWord = randomWord();
 
+
+    return false;
+}
+
+function submitGuess() {
+    console.log('submit guess working')
 
     return false;
 }
