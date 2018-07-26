@@ -1,3 +1,6 @@
-/* globals wordList */
+/* exported wordList */
 
-var wordList = 
+var wordList = [
+    'red', 'blue', 'green', 
+    'purple',
+];
