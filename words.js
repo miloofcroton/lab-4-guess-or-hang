@@ -1,0 +1,3 @@
+/* globals wordList */
+
+var wordList = 
