@@ -21,3 +21,6 @@ letter guess form
 letter guess button
 
 list of all letters the user has guessed
+
+s s a
+_ _ _ 

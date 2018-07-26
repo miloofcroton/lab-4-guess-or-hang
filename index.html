@@ -13,10 +13,11 @@
 
     <p>Welcome to the hangman game! Press the button to select a word.</p>
 
-    <p><button onclick="hangman()">Start the game</button></p>
+    <p><button onclick="return randomWord()">Start the game</button></p>
 
     <table>
         <tr>
+            <td id="letter-0"></td>
             <td id="letter-1"></td>
             <td id="letter-2"></td>
             <td id="letter-3"></td>
@@ -31,7 +32,7 @@
     </table> 
 
     <form id="letter-guess" onsubmit="return submitGuess()">
-        <input name="guess" require>
+        <input id="guess" name="guess" require>
         <button type="submit">Guess</button>
     </form>
 
