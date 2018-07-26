@@ -4,6 +4,8 @@
 
 var word; 
 
+var guesses = 0;
+
 function randomWord(){
     var arrayLength = wordList.length;
     var random = Math.floor(Math.random() * arrayLength);
@@ -25,15 +27,23 @@ function submitGuess() {
     console.log('submit guess working');
     console.log('game word', word);
 
+
+
     var wordArray = word.split('');
 
     var letterGuess = document.getElementById('guess').value;
 
     for(var i = 0; i < word.length; i++){
+
         if(letterGuess === wordArray[i]){
-            document.getElementById('letter-' + i).innerText(letterGuess);
+            document.getElementById('letter-' + i).innerText = letterGuess;
+        }
+        else {
+            document.getElementById('guess-' + guesses).innerText = letterGuess;
         }
     }
+
+    guesses++;
 
     return false;
 }
