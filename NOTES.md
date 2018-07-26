@@ -20,7 +20,21 @@ show line blanks
 letter guess form
 letter guess button
 
-list of all letters the user has guessed
+list of all wrong letters the user has guessed
 
 s s a
-_ _ _ 
+_ _ _
+
+
+guessTotal = 0
+
+var word = 'dog'
+var wordArray = ['d','o','g']
+var guesses = []
+guess.push('a') // state: guesses = 'a'
+
+for (letter in guess)
+    if letter is in wordArray
+        show letter
+    else
+

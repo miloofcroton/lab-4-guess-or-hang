@@ -5,6 +5,11 @@
 var word; 
 
 var guesses = 0;
+var correctLetters = 0;
+var incorrectLetters = 0;
+
+
+
 
 function randomWord(){
     var arrayLength = wordList.length;
@@ -37,10 +42,20 @@ function submitGuess() {
 
         if(letterGuess === wordArray[i]){
             document.getElementById('letter-' + i).innerText = letterGuess;
+            correctLetters ++;
         }
-        else {
+        else if(wordArray.indexOf(letterGuess) === -1) {
             document.getElementById('guess-' + guesses).innerText = letterGuess;
+            incorrectLetters ++;
         }
+    }
+
+    if(correctLetters === wordArray.length){
+        document.getElementById('results').innerText = 'You won!';
+    }
+
+    if(incorrectLetters > 5){
+        document.getElementById("results").innerText = "You lost!";
     }
 
     guesses++;
