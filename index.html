@@ -16,37 +16,23 @@
     <p><button onclick="return startGame()">Start the game</button></p>
 
     <div id="game-area">
-        <div id="gallows" >
-            <img src="https://www.oligalma.com/downloads/images/hangman/files/3.jpg">
-        </div>
-
+        
         <table>
-            <tr>
-                <td id="letter-0"></td>
-                <td id="letter-1"></td>
-                <td id="letter-2"></td>
-                <td id="letter-3"></td>
-                <td id="letter-4"></td>
-                <td id="letter-5"></td>
-                <td id="letter-6"></td>
-                <td id="letter-7"></td>
-                <td id="letter-8"></td>
-                <td id="letter-9"></td>
-                <td id="letter-10"></td>
+            <tr id="word-space">
             </tr>
         </table> 
-
+        
         <form id="letter-guess" onsubmit="return submitGuess()">
             <label>
-                <input id="guess" name="guess" maxlength="1" pattern="[a-z, A-Z]" placeholder="Please guess one lowercase letter" require>
+                <input id="guess" name="guess" maxlength="1" pattern="[a-z, A-Z]" placeholder="Guess one letter" require>
             </label>
             <button type="submit">Guess</button>
         </form>
-
+        
         <p id="results"></p>
-
+        
+        <h2>Incorrect Letters</h2>
         <table id="incorrect-letters">
-            <th>Incorrect Letters</th>
             <tr>
                 <td id="guess-0"></td>
                 <td id="guess-1"></td>
@@ -58,8 +44,12 @@
                 <td id="guess-7"></td>
             </tr>
         </table>
-    </div>
 
+        <div id="gallows" >
+            <img src="https://www.oligalma.com/downloads/images/hangman/files/3.jpg">
+        </div>
+    </div>
+    
     <script src="words.js"></script>
     <script src="app.js"></script>
 </body>
