@@ -1,4 +1,4 @@
-/* exported hangman, randomWord, submitGuess */
+/* exported hangman, randomWordCreator, submitGuess */
 /* globals wordList */
 
 
@@ -8,22 +8,17 @@ var guesses = 0;
 var correctLetters = 0;
 var incorrectLetters = 0;
 
-
-
-
-function randomWord(){
-    var arrayLength = wordList.length;
-    var random = Math.floor(Math.random() * arrayLength);
-    word = wordList[random];
-
-    console.log(word);
-
-    return false;
+function startGame() {
+    randomWordCreator();
+    document.getElementById('game-area').style.visibility = 'visible';
 }
 
-function hangman() {
-    console.log('I work');
-   
+function randomWordCreator(){
+    var arrayLength = wordList.length;
+    var randomIndex = Math.floor(Math.random() * arrayLength);
+    word = wordList[randomIndex];
+
+    console.log(word);
 
     return false;
 }
@@ -32,11 +27,8 @@ function submitGuess() {
     console.log('submit guess working');
     console.log('game word', word);
 
-
-
     var wordArray = word.split('');
-
-    var letterGuess = document.getElementById('guess').value;
+    var letterGuess = document.getElementById('guess').value.toLowerCase();
 
     for(var i = 0; i < word.length; i++){
 
@@ -44,18 +36,19 @@ function submitGuess() {
             document.getElementById('letter-' + i).innerText = letterGuess;
             correctLetters ++;
         }
-        else if(wordArray.indexOf(letterGuess) === -1) {
-            document.getElementById('guess-' + guesses).innerText = letterGuess;
-            incorrectLetters ++;
-        }
+    }
+
+    if(wordArray.indexOf(letterGuess) === -1) {
+        document.getElementById('guess-' + incorrectLetters).innerText = letterGuess;
+        incorrectLetters ++;
     }
 
     if(correctLetters === wordArray.length){
         document.getElementById('results').innerText = 'You won!';
     }
-
+    
     if(incorrectLetters > 5){
-        document.getElementById("results").innerText = "You lost!";
+        document.getElementById('results').innerText = 'You lost!';
     }
 
     guesses++;

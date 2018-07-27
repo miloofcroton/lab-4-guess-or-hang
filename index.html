@@ -13,46 +13,50 @@
 
     <p>Welcome to the hangman game! Press the button to select a word.</p>
 
-    <p><button onclick="return randomWord()">Start the game</button></p>
+    <p><button onclick="return startGame()">Start the game</button></p>
 
-    <table>
-        <tr>
-            <td id="letter-0"></td>
-            <td id="letter-1"></td>
-            <td id="letter-2"></td>
-            <td id="letter-3"></td>
-            <td id="letter-4"></td>
-            <td id="letter-5"></td>
-            <td id="letter-6"></td>
-            <td id="letter-7"></td>
-            <td id="letter-8"></td>
-            <td id="letter-9"></td>
-            <td id="letter-10"></td>
-        </tr>
-    </table> 
+    <div id="game-area">
+        <table>
+            <tr>
+                <td id="letter-0"></td>
+                <td id="letter-1"></td>
+                <td id="letter-2"></td>
+                <td id="letter-3"></td>
+                <td id="letter-4"></td>
+                <td id="letter-5"></td>
+                <td id="letter-6"></td>
+                <td id="letter-7"></td>
+                <td id="letter-8"></td>
+                <td id="letter-9"></td>
+                <td id="letter-10"></td>
+            </tr>
+        </table> 
 
-    <form id="letter-guess" onsubmit="return submitGuess()">
-        <input id="guess" name="guess" require>
-        <button type="submit">Guess</button>
-    </form>
+        <form id="letter-guess" onsubmit="return submitGuess()">
+            <label>
+                <input id="guess" name="guess" maxlength="1" pattern="[a-z, A-Z]" placeholder="Please guess one lowercase letter" require>
+            </label>
+            <button type="submit">Guess</button>
+        </form>
 
-    <p id="results"></p>
+        <p id="results"></p>
 
-    <table id="incorrect-letters">
-        <th>Incorrect Letters</th>
-        <tr>
-            <td id="guess-0"></td>
-            <td id="guess-1"></td>
-        </tr>
-        <tr>
-            <td id="guess-2"></td>
-            <td id="guess-3"></td>
-        </tr>
-        <tr>
-            <td id="guess-4"></td>
-            <td id="guess-5"></td>
-        </tr>
-    </table>
+        <table id="incorrect-letters">
+            <th>Incorrect Letters</th>
+            <tr>
+                <td id="guess-0"></td>
+                <td id="guess-1"></td>
+            </tr>
+            <tr>
+                <td id="guess-2"></td>
+                <td id="guess-3"></td>
+            </tr>
+            <tr>
+                <td id="guess-4"></td>
+                <td id="guess-5"></td>
+            </tr>
+        </table>
+    </div>
 
     <script src="words.js"></script>
     <script src="app.js"></script>
