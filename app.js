@@ -1,14 +1,13 @@
-/* exported hangman, randomWordCreator, submitGuess */
+/* exported startGame, submitGuess */
 /* globals wordList */
 
 
 var word; 
 
-var guesses = 0;
 var correctLetters = 0;
 var incorrectLetters = 0;
 
-function startGame() {
+function startGame(){
     randomWordCreator();
     document.getElementById('game-area').style.visibility = 'visible';
 }
@@ -40,6 +39,10 @@ function submitGuess() {
 
     if(wordArray.indexOf(letterGuess) === -1) {
         document.getElementById('guess-' + incorrectLetters).innerText = letterGuess;
+
+        var imageNumber = incorrectLetters + 4;
+        document.getElementById('gallows').innerHTML = '<img src="https://www.oligalma.com/downloads/images/hangman/files/' + imageNumber + '.jpg">';
+        
         incorrectLetters ++;
     }
 
@@ -47,12 +50,14 @@ function submitGuess() {
         document.getElementById('results').innerText = 'You won!';
     }
     
-    if(incorrectLetters > 5){
+    if(incorrectLetters > 6){
         document.getElementById('results').innerText = 'You lost!';
     }
 
-    guesses++;
 
     return false;
 }
 
+function gallows(){
+    
+}

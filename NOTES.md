@@ -119,3 +119,19 @@ main.css:
 }
 
 
+
+
+
+
+
+
+https://www.oligalma.com/downloads/images/hangman/files/4.jpg
+https://www.oligalma.com/downloads/images/hangman/files/5.jpg
+https://www.oligalma.com/downloads/images/hangman/files/6.jpg
+https://www.oligalma.com/downloads/images/hangman/files/7.jpg
+https://www.oligalma.com/downloads/images/hangman/files/8.jpg
+https://www.oligalma.com/downloads/images/hangman/files/9.jpg
+https://www.oligalma.com/downloads/images/hangman/files/10.jpg
+
+
+https://imgur.com/N7NJHRK
