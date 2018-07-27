@@ -18,8 +18,10 @@
     <div id="game-area">
         
         <table>
-            <tr id="word-space">
-            </tr>
+            <tbody>
+                <tr id="word-space">
+                </tr>
+            </tbody>
         </table> 
         
         <form id="letter-guess" onsubmit="return submitGuess()">
@@ -28,6 +30,8 @@
             </label>
             <button type="submit">Guess</button>
         </form>
+
+        <p id="guesses-left"></p>
         
         <p id="results"></p>
         

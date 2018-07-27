@@ -6,6 +6,7 @@ var word;
 
 var correctLetters = 0;
 var incorrectLetters = 0;
+var guessesLeft = 6;
 
 var wordArray;
 var letterGuess;
@@ -13,6 +14,7 @@ var letterGuess;
 function startGame(){
     randomWordCreator();
     document.getElementById('game-area').style.visibility = 'visible';
+    triesLeft();
 }
 
 function randomWordCreator(){
@@ -27,7 +29,7 @@ function randomWordCreator(){
 function wordSpaceCreator() {
     var wordSpace = '';
     for(var i = 0; i < word.length; i++) {
-        wordSpace += `<td id="letter-${i}"></td>`;
+        wordSpace += `<td id="letter-${i}" class="letter-space"></td> <td class="spacer"></td>`;
     }
     document.getElementById('word-space').innerHTML = wordSpace;
 }
@@ -39,16 +41,12 @@ function submitGuess() {
     letterGuess = document.getElementById('guess').value.toLowerCase();
     
     correctBox();
-    
     incorrectBox();
-    
+    triesLeft();
     winLoss();
     
     return false;
 }
-
-
-
 
 function correctBox() {
     for(var i = 0; i < word.length; i++){
@@ -66,6 +64,11 @@ function incorrectBox() {
         gallows();
         incorrectLetters ++;
     }
+}
+
+function triesLeft() {
+    guessesLeft = 6 - incorrectLetters;
+    document.getElementById('guesses-left').innerText = `You have ${guessesLeft} incorrect guesses left`;
 }
 
 function gallows() {
