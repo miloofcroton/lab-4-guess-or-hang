@@ -1,4 +1,4 @@
-/* exported startGame, submitGuess */
+/* exported startGame, submitGuess, resetGame */
 /* globals wordList */
 
 
@@ -6,15 +6,20 @@ var word;
 
 var correctLetters = 0;
 var incorrectLetters = 0;
-var guessesLeft;
 var wordArray;
+
+var guessesLeft;
 var lettersGuessed = [];
+
+var submitButton = document.getElementById('submit-button');
+var resetButton = document.getElementById('reset-button');
 
 
 function startGame(){
     randomWordCreator();
     document.getElementById('game-area').style.visibility = 'visible';
     triesLeft();
+    startAreaHidden();
 }
 
 function randomWordCreator(){
@@ -76,20 +81,79 @@ function incorrectBox(letterGuess) {
 
 function triesLeft() {
     guessesLeft = 7 - incorrectLetters;
-    document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} more mistakes, the man hangs.`;
+    if(guessesLeft > 1) {
+        document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} mistakes, the man hangs.`;
+    }
+    else {
+        document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} mistake, the man hangs.`;
+    }
 }
 
 function gallows() {
     var imageNumber = incorrectLetters + 4;
     document.getElementById('gallows').innerHTML = '<img src="https://www.oligalma.com/downloads/images/hangman/files/' + imageNumber + '.jpg">';
 }
+
 function winLoss() {
     
     if(correctLetters === wordArray.length){
+
         document.getElementById('results').innerText = 'You won!';
+        document.getElementById('guesses-left').innerText = '';
+        submitButtonDisable();
     }
     
     if(incorrectLetters > 6){
         document.getElementById('results').innerText = 'You lost!';
+        document.getElementById('guesses-left').innerText = '';
+        submitButtonDisable();
     }
+
+}
+
+function startAreaHidden() {
+    document.getElementById('start-area').style.visibility = 'hidden';
+}
+
+function startAreaVisible() {
+    document.getElementById('start-area').style.visibility = 'visible';
+}
+
+function submitButtonEnable() {
+    submitButton.disabled = false;
+}
+
+function submitButtonDisable() {
+    submitButton.disabled = true;
+    resetButton.disabled = false;
+}
+
+
+
+function resetGame() {
+
+    console.log('reset working');
+
+    for(var i = 0; i <= incorrectLetters; i++) {
+        document.getElementById('guess-' + i).innerText = '';
+    }
+
+    document.getElementById('gallows').innerHTML = '<img src="https://www.oligalma.com/downloads/images/hangman/files/3.jpg">';
+
+    document.getElementById('results').innerText = '';
+
+    word = '';
+    correctLetters = 0;
+    incorrectLetters = 0;
+    wordArray = [];
+    lettersGuessed = [];
+
+    submitButtonEnable();
+    document.getElementById('game-area').style.visibility = 'hidden';
+
+    startAreaVisible();
+    
+    console.log(`on reset: word is ${word}, correctLetters is ${correctLetters}, incorrectLetters is ${incorrectLetters}, wordArray is ${wordArray}, lettersGuessed is ${lettersGuessed}`);
+
+    
 }

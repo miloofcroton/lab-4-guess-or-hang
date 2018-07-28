@@ -6,14 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HANGMAN</title>
     <link rel="stylesheet" href="main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
 </head>
 
 <body>
+    <h1 id="line1">the</h1>
     <h1>Hangman Game</h1>
 
-    <p>Welcome to the hangman game! Press the button to select a word.</p>
+    <div id="start-area">
 
-    <p><button onclick="return startGame()">Start the game</button></p>
+        <p>Welcome to the hangman game! Press the button to select a word.</p>
+
+        <p><button onclick="return startGame()">Start the game</button></p>
+
+    </div>
 
     <div id="game-area">
         
@@ -24,11 +30,12 @@
             </tbody>
         </table> 
         
-        <form id="letter-guess" onsubmit="return submitGuess()">
+        <form id="letter-guess" onsubmit="return submitGuess()" onreset="return resetGame()">
             <label>
-                <input id="guess" name="guess" maxlength="1" pattern="[a-z, A-Z]" placeholder="Guess one letter" title="Guess only letters, and only those that you haven't submitted yet" require>
+                <input id="guess" name="guess" maxlength="1" pattern="[a-zA-Z]" placeholder="Guess one letter" title="Guess only letters, and only those that you haven't submitted yet" require>
             </label>
-            <button type="submit">Guess</button>
+            <button type="submit" id="submit-button">Guess</button>
+            <button type="reset" id="reset-button">Reset Game</button>
         </form>
 
         <p id="guesses-left"></p>
