@@ -26,7 +26,7 @@
         
         <form id="letter-guess" onsubmit="return submitGuess()">
             <label>
-                <input id="guess" name="guess" maxlength="1" pattern="[a-z, A-Z]" placeholder="Guess one letter" require>
+                <input id="guess" name="guess" maxlength="1" pattern="[a-z, A-Z]" placeholder="Guess one letter" title="Guess only letters, and only those that you haven't submitted yet" require>
             </label>
             <button type="submit">Guess</button>
         </form>

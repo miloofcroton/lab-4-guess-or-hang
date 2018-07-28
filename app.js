@@ -6,10 +6,11 @@ var word;
 
 var correctLetters = 0;
 var incorrectLetters = 0;
-var guessesLeft = 6;
+var guessesLeft;
 
 var wordArray;
-var letterGuess;
+var lettersGuessed = [];
+
 
 function startGame(){
     randomWordCreator();
@@ -37,18 +38,26 @@ function wordSpaceCreator() {
 function submitGuess() {
     console.log('submit guess working');
     console.log('game word', word);
+    var letterGuess = document.getElementById('guess').value.toLowerCase();
+    document.getElementById('guess').value = '';
     
-    letterGuess = document.getElementById('guess').value.toLowerCase();
-    
-    correctBox();
-    incorrectBox();
-    triesLeft();
-    winLoss();
+
+
+    if(lettersGuessed.includes(letterGuess)) {
+        alert('You have already guessed that letter. Please try again.');
+    } 
+    else {
+        lettersGuessed.push(letterGuess);
+        correctBox(letterGuess);
+        incorrectBox(letterGuess);
+        triesLeft();
+        winLoss();
+    }
     
     return false;
 }
 
-function correctBox() {
+function correctBox(letterGuess) {
     for(var i = 0; i < word.length; i++){
         
         if(letterGuess === wordArray[i]){
@@ -58,7 +67,7 @@ function correctBox() {
     }
 }
 
-function incorrectBox() {
+function incorrectBox(letterGuess) {
     if(wordArray.indexOf(letterGuess) === -1) {
         document.getElementById('guess-' + incorrectLetters).innerText = letterGuess;
         gallows();
@@ -67,8 +76,8 @@ function incorrectBox() {
 }
 
 function triesLeft() {
-    guessesLeft = 6 - incorrectLetters;
-    document.getElementById('guesses-left').innerText = `You have ${guessesLeft} incorrect guesses left`;
+    guessesLeft = 7 - incorrectLetters;
+    document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} more mistakes, the man hangs.`;
 }
 
 function gallows() {
