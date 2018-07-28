@@ -7,7 +7,6 @@ var word;
 var correctLetters = 0;
 var incorrectLetters = 0;
 var guessesLeft;
-
 var wordArray;
 var lettersGuessed = [];
 
