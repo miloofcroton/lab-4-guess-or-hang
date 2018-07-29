@@ -47,7 +47,7 @@
             "while": { "after": false },
             "do": { "after": false },
             "switch": { "after": false },
-            "case": { "after": false }
+            "catch": { "after": false }
           }
         }
       ],

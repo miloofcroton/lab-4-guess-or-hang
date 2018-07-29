@@ -1,6 +1,7 @@
 
  <!-- markdownlint-disable -->
 
+
 guess.push('a') // state: guesses = 'a'
 
 for (letter in guess)
@@ -11,25 +12,8 @@ for (letter in guess)
 -----------------------------------------
 
 
-states:
-word chosen as string
-word chosen as array of characters
-number of guesses (and by extension, the gallows body)
-letters guessed as array of characters
-game status: { 
-    initial: not started, 
-    started: [mid-game, victory, loss]
-}
-
-
 
 words.js:
-
-var words = [
-    'dog',
-    'cat',
-    mouse',
-]
 
 app.js:
 

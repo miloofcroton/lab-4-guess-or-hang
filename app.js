@@ -1,8 +1,6 @@
 /* exported startGame, submitGuess */
 /* globals wordList */
 
-
-
 var gameState = {
     word: {
         asString: '',
@@ -10,10 +8,10 @@ var gameState = {
     },
     guesses: {
         number: {
-            incorrectGuesses: 0,
-            correctGuesses: 0,
-            totalGuesses: 0,
-            remainingGuesses: 0,
+            incorrectGuesses: 3,
+            correctGuesses: 5,
+            totalGuesses: correctLetters + incorrectLetters,
+            remainingGuesses: 7 - incorrectLetters,
         },
         letters: [],
     },
@@ -22,52 +20,68 @@ var gameState = {
         midGame: false,
         victory: false,
         loss: false,
+    },
+    elements: {
+        gallowsImage: '',
+        submitButton: document.getElementById('submit-button'),
+        resetButton: document.getElementById('reset-button'),
     }
+
 };
 
 
 
 
-var word; 
+var word; //gameState.word.asString
+var wordArray; //gameState.word.asCharArray
 
-var correctLetters = 0;
-var incorrectLetters = 0;
-var wordArray;
+var correctLetters = 0; //gameState.guesses.number.correctLetters
+var incorrectLetters = 0; //gameState.guesses.number.incorrectLetters
 
-var guessesLeft;
-var lettersGuessed = [];
+var guessesLeft; //gameState.guesses.number.remainingGuesses
+var lettersGuessed = []; //gameState.guesses.letters
 
-var submitButton = document.getElementById('submit-button');
-var resetButton = document.getElementById('reset-button');
+var submitButton = document.getElementById('submit-button'); //gameState.elements.submitButton
+var resetButton = document.getElementById('reset-button'); 
+
+
+var setGameState = {
+    setVars: function() {
+        word = '';
+        wordArray = [];
+        correctLetters = 0;
+        incorrectLetters = 0;
+        lettersGuessed = [];
+    },
+    setElements: function() {
+        document.getElementById('gallows').innerHTML = '<img src="/assets/0.jpg">';
+        document.getElementById('results').innerText = '';
+        for(var i = 0; i < 7; i++) {
+            document.getElementById('guess-' + i).innerText = '';
+        }
+    }
+};
+
 
 
 function startGame(action){
     switch(action){
         case 'start':
             randomWordCreator();
-            document.getElementById('game-area').style.visibility = 'visible';
             triesLeft();
-            startArea('hide');
+
+            elementControl('startArea', 'hide');
+            elementControl('gameArea', 'show');
+            
             break;
         case 'reset':
-            for(var i = 0; i <= incorrectLetters; i++) {
-                document.getElementById('guess-' + i).innerText = '';
-            }
+            setGameState.setElements;    
+            setGameState.setVars;
 
-            document.getElementById('gallows').innerHTML = '<img src="/assets/0.jpg">';
-            document.getElementById('results').innerText = '';
-    
-            word = '';
-            correctLetters = 0;
-            incorrectLetters = 0;
-            wordArray = [];
-            lettersGuessed = [];
-    
-            buttonControl('enable');
-            document.getElementById('game-area').style.visibility = 'hidden';
-    
-            startArea('show');
-    
+            elementControl('buttonControl', 'show');
+            elementControl('gameArea', 'hide');
+            elementControl('startArea', 'show');
+
             console.log(`on reset: word is ${word}, correctLetters is ${correctLetters}, incorrectLetters is ${incorrectLetters}, wordArray is ${wordArray}, lettersGuessed is ${lettersGuessed}`);
             
             break;
@@ -77,29 +91,53 @@ function startGame(action){
     }
 }
 
-function startArea(action){
-    switch(action){
-        case 'hide':
-            document.getElementById('start-area').style.visibility = 'hidden';
+function elementControl(element, action){
+    switch(element) {
+        case 'startArea':
+            switch(action) {
+                case 'hide':
+                    document.getElementById('start-area').style.visibility = 'hidden';
+                    break;
+                case 'show':
+                    document.getElementById('start-area').style.visibility = 'visible';
+                    break;
+                default:
+                    console.log('startArea must have an action argument');
+            }
+
             break;
-        case 'show':
-            document.getElementById('start-area').style.visibility = 'visible';
+
+        case 'gameArea':
+            switch(action) {
+                case 'hide':
+                    document.getElementById('game-area').style.visibility = 'hidden';
+                    break;
+                case 'show':
+                    document.getElementById('game-area').style.visibility = 'visible';
+                    break;
+                default:
+                    console.log('gameArea must have an action argument');
+            }
+
             break;
+
+        case 'buttonControl':
+            switch(action) {
+                case 'show':
+                    submitButton.disabled = false;
+                    break;
+                case 'hide':
+                    submitButton.disabled = true;
+                    resetButton.disabled = false;
+                    break;
+                default:
+                    console.log('buttonControl must have an action argument');
+            }
+
+            break;
+
         default:
-            console.log('startArea must have an action argument');
-    }
-}
-function buttonControl(action){
-    switch(action) {
-        case 'enable':
-            submitButton.disabled = false;
-            break;
-        case 'disable':
-            submitButton.disabled = true;
-            resetButton.disabled = false;            
-            break;
-        default:
-            console.log('buttonControl must have an action argument');
+            console.log('elementControl was called incorrectly');
     }
 }
 
@@ -178,13 +216,15 @@ function winLoss() {
     if(correctLetters === wordArray.length){
         document.getElementById('results').innerText = 'You won!';
         document.getElementById('guesses-left').innerText = '';
-        buttonControl('disable');
+
+        elementControl('buttonControl', 'hide');
     }
     
     if(incorrectLetters > 6){
         document.getElementById('results').innerText = 'You lost!';
         document.getElementById('guesses-left').innerText = '';
-        buttonControl('disable');
+
+        elementControl('buttonControl', 'hide');
     }
 
 }
