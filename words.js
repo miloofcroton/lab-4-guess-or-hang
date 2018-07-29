@@ -1,6 +1,5 @@
 /* exported wordList */
 
 var wordList = [
-    'red', 'blue', 'green', 
-    'purple',
+    'appling', 'blue', 'green', 'purple',
 ];
