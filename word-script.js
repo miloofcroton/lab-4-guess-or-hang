@@ -8,10 +8,10 @@ var wordElements;
 var wordArray = [];
 var wordString = "";
 
-function initiate(){
+function initiateVars(){
     wordElements = document.getElementsByTagName('h3');
-    var wordArray = [];
-    var wordString = "";
+    wordArray = [];
+    wordString = "";
 }
 
 function elementToArray(){
@@ -21,18 +21,22 @@ function elementToArray(){
 }
 
 function onlyVocab(){
-    var newArray = [];
     for (var i = 0; i < 9; i++) {
         wordArray.shift();
     }
 }
 
 function onlyLetters(){
-    for (var i = 0; i < wordArray.length; i++) {
-        var onlyLetters = new RegExp('[a-z, A-Z]');
-        newArray.push(onlyLetters.exec(wordArray[i]))
+    var tempArray = [];
+    function isAlpha(string){
+        return /^[a-z]+$/i.test(string);
     }
-    wordArray = newArray;
+    for (var i = 0; i < wordArray.length; i++) {
+        if (isAlpha(wordArray[i])){
+            tempArray.push(wordArray[i]);
+        }
+    }
+    wordArray = tempArray;
 }
 
 function cleanArray(){
@@ -46,8 +50,8 @@ function arrayToString(){
     }
 }
 
-function returnWords() {
-    initiate();
+function returnWords(){
+    initiateVars();
     elementToArray();
     cleanArray();
     arrayToString();
@@ -55,5 +59,4 @@ function returnWords() {
 }
 
 returnWords();
-
 
