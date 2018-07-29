@@ -2,6 +2,8 @@
 /* globals wordList */
 
 
+
+
 var word; 
 
 var correctLetters = 0;
@@ -28,7 +30,7 @@ function randomWordCreator(){
     word = wordList[randomIndex];
     wordArray = word.split('');
     wordSpaceCreator();
-    console.log(word);   
+    console.log('The new word is:', word);   
 }
 
 function wordSpaceCreator() {
@@ -40,12 +42,10 @@ function wordSpaceCreator() {
 }
 
 function submitGuess() {
-    console.log('submit guess working');
-    console.log('game word', word);
     var letterGuess = document.getElementById('guess').value.toLowerCase();
-    document.getElementById('guess').value = '';
-    
+    console.log('Their guess was: ', letterGuess);
 
+    document.getElementById("guess").value = "";
 
     if(lettersGuessed.includes(letterGuess)) {
         alert('You have already guessed that letter. Please try again.');
@@ -82,10 +82,10 @@ function incorrectBox(letterGuess) {
 function triesLeft() {
     guessesLeft = 7 - incorrectLetters;
     if(guessesLeft > 1) {
-        document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} mistakes, the man hangs.`;
+        document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} more mistakes, the man hangs.`;
     }
     else {
-        document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} mistake, the man hangs.`;
+        document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} more mistake, the man hangs.`;
     }
 }
 
