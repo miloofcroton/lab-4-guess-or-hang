@@ -28,12 +28,12 @@
         
         <form id="letter-guess" onsubmit="return submitGuess()">
             <label>
-                <input id="guess" name="guess" maxlength="1" pattern="[a-z, A-Z]" placeholder="Guess one letter" title="Guess only letters, and only those that you haven't submitted yet" require>
+                <legend>Guess any letter that you haven't guessed yet</legend>
+                <input id="guess" name="guess" maxlength="1" pattern="[a-z, A-Z]" placeholder="Insert guess here" require>
             </label>
             <button type="submit">Guess</button>
         </form>
 
-        <p id="guesses-left"></p>
         
         <p id="results"></p>
         
@@ -58,6 +58,7 @@
             </tr>
         </table>
 
+        <h2 id="guesses-left"></h2>
         <div id="gallows" >
             <img src="/assets/0.jpg">
         </div>

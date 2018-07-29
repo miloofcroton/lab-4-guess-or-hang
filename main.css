@@ -10,6 +10,10 @@ h2 {
     visibility: hidden;
 }
 
+#guess {
+    width: 50px;
+}
+
 .word-boxes {
     border: 1px solid black;
     text-align: center;
