@@ -1,4 +1,6 @@
 
+ <!-- markdownlint-disable -->
+
 file: words.js
 
 wordList = [...]

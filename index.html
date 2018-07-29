@@ -23,7 +23,9 @@
 
     <div id="game-area">
         
-        <table>
+
+        <h2>The Word</h2>
+        <table class="word-boxes">
             <tbody>
                 <tr id="word-space">
                 </tr>
@@ -32,32 +34,40 @@
         
         <form id="letter-guess" onsubmit="return submitGuess()" onreset="return resetGame()">
             <label>
-                <input id="guess" name="guess" maxlength="1" pattern="[a-zA-Z]" placeholder="Guess one letter" title="Guess only letters, and only those that you haven't submitted yet" require>
+                <legend>Guess any letter that you haven't guessed yet</legend>
+                <input id="guess" name="guess" maxlength="1" pattern="[a-zA-Z]" placeholder="Insert guess here" require>
             </label>
             <button type="submit" id="submit-button">Guess</button>
             <button type="reset" id="reset-button">Reset Game</button>
         </form>
 
-        <p id="guesses-left"></p>
         
         <p id="results"></p>
         
         <h2>Incorrect Letters</h2>
-        <table id="incorrect-letters">
+        <table id="incorrect-letters" class="word-boxes">
             <tr>
-                <td id="guess-0"></td>
-                <td id="guess-1"></td>
-                <td id="guess-2"></td>
-                <td id="guess-3"></td>
-                <td id="guess-4"></td>
-                <td id="guess-5"></td>
-                <td id="guess-6"></td>
-                <td id="guess-7"></td>
+                <td id="guess-0" class="letter-space"></td>
+                <td class="spacer"></td>
+                <td id="guess-1" class="letter-space"></td>
+                <td class="spacer"></td>
+                <td id="guess-2" class="letter-space"></td>
+                <td class="spacer"></td>
+                <td id="guess-3" class="letter-space"></td>
+                <td class="spacer"></td>
+                <td id="guess-4" class="letter-space"></td>
+                <td class="spacer"></td>
+                <td id="guess-5" class="letter-space"></td>
+                <td class="spacer"></td>
+                <td id="guess-6" class="letter-space"></td>
+                <td class="spacer"></td>
+                <td id="guess-7" class="letter-space"></td>
             </tr>
         </table>
 
+        <h2 id="guesses-left"></h2>
         <div id="gallows" >
-            <img src="https://www.oligalma.com/downloads/images/hangman/files/3.jpg">
+            <img src="/assets/0.jpg">
         </div>
     </div>
     

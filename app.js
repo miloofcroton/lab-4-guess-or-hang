@@ -90,8 +90,8 @@ function triesLeft() {
 }
 
 function gallows() {
-    var imageNumber = incorrectLetters + 4;
-    document.getElementById('gallows').innerHTML = '<img src="https://www.oligalma.com/downloads/images/hangman/files/' + imageNumber + '.jpg">';
+    var gallowImage = '<img src="/assets/' + (incorrectLetters + 1) + '.jpg">';
+    document.getElementById('gallows').innerHTML = gallowImage;
 }
 
 function winLoss() {

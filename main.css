@@ -26,18 +26,17 @@ p {
     margin: 0 0 50px;
 }
 
-#incorrect-letters {
-    border: 1px solid black;
-    width: 175px;
-    height: 25px;
-    text-align: center;
-}
-
 #game-area {
     visibility: hidden;
 }
 
-table {
+#guess {
+    width: 50px;
+}
+
+.word-boxes {
+    border: 1px solid black;
+    text-align: center;
     margin: 0 auto 50px;
     padding: 20px;
 }
