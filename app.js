@@ -1,37 +1,6 @@
 /* exported startGame, submitGuess */
 /* globals wordList */
 
-var gameState = {
-    word: {
-        asString: '',
-        asCharArray: [],
-    },
-    guesses: {
-        number: {
-            incorrectGuesses: 3,
-            correctGuesses: 5,
-            totalGuesses: correctLetters + incorrectLetters,
-            remainingGuesses: 7 - incorrectLetters,
-        },
-        letters: [],
-    },
-    game: {
-        intial: true,
-        midGame: false,
-        victory: false,
-        loss: false,
-    },
-    elements: {
-        gallowsImage: '',
-        submitButton: document.getElementById('submit-button'),
-        resetButton: document.getElementById('reset-button'),
-    }
-
-};
-
-
-
-
 var word; //gameState.word.asString
 var wordArray; //gameState.word.asCharArray
 
@@ -45,20 +14,53 @@ var submitButton = document.getElementById('submit-button'); //gameState.element
 var resetButton = document.getElementById('reset-button'); 
 
 
-var setGameState = {
-    setVars: function() {
-        word = '';
-        wordArray = [];
-        correctLetters = 0;
-        incorrectLetters = 0;
-        lettersGuessed = [];
-    },
-    setElements: function() {
-        document.getElementById('gallows').innerHTML = '<img src="/assets/0.jpg">';
-        document.getElementById('results').innerText = '';
-        for(var i = 0; i < 7; i++) {
-            document.getElementById('guess-' + i).innerText = '';
+var gameState = {
+
+    value: {
+        word: {
+            asString: '',
+            asCharArray: [],
+        },
+        guesses: {
+            number: {
+                incorrectGuesses: 3,
+                correctGuesses: 5,
+                totalGuesses: correctLetters + incorrectLetters,
+                remainingGuesses: 7 - incorrectLetters,
+            },
+            letters: [],
+        },
+        game: {
+            intial: true,
+            midGame: false,
+            victory: false,
+            loss: false,
+        },
+        elements: {
+            gallowsImage: '',
+            submitButton: document.getElementById('submit-button'),
+            resetButton: document.getElementById('reset-button'),
         }
+    },
+
+    set: {
+        vars: function() {
+            word = '';
+            wordArray = [];
+            correctLetters = 0;
+            incorrectLetters = 0;
+            lettersGuessed = [];
+        },
+        elements: function() {
+            document.getElementById('gallows').innerHTML = '<img src="/assets/0.jpg">';
+            document.getElementById('results').innerText = '';
+            for(var i = 0; i < 7; i++) {
+                document.getElementById('guess-' + i).innerText = '';
+            }
+        },
+    },
+    get: {
+        all: console.log('I will log gameState.value')
     }
 };
 
@@ -75,8 +77,8 @@ function startGame(action){
             
             break;
         case 'reset':
-            setGameState.setElements;    
-            setGameState.setVars;
+            gameState.set.elements;    
+            gameState.set.vars;
 
             elementControl('buttonControl', 'show');
             elementControl('gameArea', 'hide');
