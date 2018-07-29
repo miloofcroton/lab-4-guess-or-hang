@@ -1,36 +1,6 @@
 
  <!-- markdownlint-disable -->
 
-file: words.js
-
-wordList = [...]
-
-file: app.js
-
-function that selects random word from wordList
-
-function that reveals correct letters
-function that adds bodypart to gallows
-
-array for all letters guessed
-
-html:
-
-button to start the game
-show line blanks
-
-letter guess form
-letter guess button
-
-list of all wrong letters the user has guessed
-
----------------------------------
-
-guessTotal = 0
-
-var word = 'dog'
-var wordArray = ['d','o','g']
-var guesses = []
 guess.push('a') // state: guesses = 'a'
 
 for (letter in guess)
@@ -42,9 +12,10 @@ for (letter in guess)
 
 
 states:
-which word chosen
+word chosen as string
+word chosen as array of characters
 number of guesses (and by extension, the gallows body)
-letters guessed
+letters guessed as array of characters
 game status: { 
     initial: not started, 
     started: [mid-game, victory, loss]
@@ -72,68 +43,3 @@ function getRandomIndex(max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * max);
 }
-
-for letter in word:
-    document.getElementById('word-display').innerHTML('<td id="letter-space">__</td> <td id="between-letter"></td' * i)
-
-
-
-index.html:
-
-<table>
-    <tr id="word-display">
-    
-    </tr>
-</table>
-
-<table>
-    <tr class="guess-display">
-        <td class="guess-space" id="guess-1"></td>
-        <td class="between-guess"></td>
-        <td class="guess-space" id="guess-2"></td>
-    </tr>
-    <tr class="guess-display">
-        <td class="guess-space" id="guess-3"></td>
-        <td class="between-guess"></td>
-        <td class="guess-space" id="guess-4"></td>    
-    </tr>
-    <tr class="guess-display">
-        <td class="guess-space" id="guess-5"></td>
-        <td class="between-guess"></td>
-        <td class="guess-space" id="guess-6"></td>    
-    </tr>
-</table>
-
-
-main.css:
-
-.letter-space {
-    width: ;
-}
-.between-letter {
-    width: ;
-}
-.guess-space {
-    width: ;
-}
-.between-guess {
-    width: ;
-}
-
-
-
-
-
-
-
-
-https://www.oligalma.com/downloads/images/hangman/files/4.jpg
-https://www.oligalma.com/downloads/images/hangman/files/5.jpg
-https://www.oligalma.com/downloads/images/hangman/files/6.jpg
-https://www.oligalma.com/downloads/images/hangman/files/7.jpg
-https://www.oligalma.com/downloads/images/hangman/files/8.jpg
-https://www.oligalma.com/downloads/images/hangman/files/9.jpg
-https://www.oligalma.com/downloads/images/hangman/files/10.jpg
-
-
-https://imgur.com/N7NJHRK

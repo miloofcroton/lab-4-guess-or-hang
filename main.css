@@ -2,12 +2,13 @@
 
 body {
     text-align: center;
+    background-image: url("/assets/clouds.jpg") ;
 }
 
 h1 {
     font-family: 'Rock Salt', cursive;
     font-size: 3.5em;
-    color:  rgb(238, 97, 41);
+    color:  #f2ce19;
     text-shadow: 5px 3px black;
     padding: 50px 0 50px;
 }
