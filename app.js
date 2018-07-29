@@ -1,4 +1,4 @@
-/* exported startGame, submitGuess */
+/* exported gameState, guessHandler */
 /* globals wordList */
 
 var word; //gameState.word.asString
@@ -12,6 +12,7 @@ var lettersGuessed = []; //gameState.guesses.letters
 
 var submitButton = document.getElementById('submit-button'); //gameState.elements.submitButton
 var resetButton = document.getElementById('reset-button'); 
+
 
 
 var gameState = {
@@ -42,8 +43,26 @@ var gameState = {
             resetButton: document.getElementById('reset-button'),
         }
     },
+    start: function() {
+        gameState.set.word();
 
-    set: {
+        triesLeft();
+        
+        elementControl('startArea', 'hide');
+        elementControl('gameArea', 'show');
+    },
+    restart: function() {
+        gameState.reset.elements;
+        gameState.reset.vars;
+
+        elementControl('buttonControl', 'show');
+        elementControl('gameArea', 'hide');
+        elementControl('startArea', 'show');
+
+        console.log(`on reset: word is ${word}, correctLetters is ${correctLetters}, incorrectLetters is ${incorrectLetters}, wordArray is ${wordArray}, lettersGuessed is ${lettersGuessed}`);
+    },
+
+    reset: {
         vars: function() {
             word = '';
             wordArray = [];
@@ -58,40 +77,67 @@ var gameState = {
                 document.getElementById('guess-' + i).innerText = '';
             }
         },
+        guess: function() {
+            document.getElementById('guess').value = '';
+        },
+    },
+    set: {
+        word: function() {
+            var arrayLength = wordList.length;
+            var randomIndex = Math.floor(Math.random() * arrayLength);
+            gameState.value.word.asString = wordList[randomIndex];
+            gameState.value.word.asCharArray = gameState.value.word.asString.split('');
+            gameState.set.wordSpace();
+            console.log('The new word is:', word);
+        },
+        wordSpace: function() {
+            var wordSpace = '';
+            for(var i = 0; i < word.length; i++) {
+                wordSpace += `<td id="letter-${i}" class="letter-space"></td> <td class="spacer"></td>`;
+            }
+            document.getElementById('word-space').innerHTML = wordSpace;
+        },
+        guess: function() {
+            var letterGuess = document.getElementById('guess').value.toLowerCase();
+            console.log('Their guess was: ', letterGuess);
+            gameState.reset.guess();
+
+            if(gameState.value.guesses.letters.includes(letterGuess)) {
+                alert('You have already guessed that letter. Please try again.');
+            }
+            else {
+                gameState.value.guesses.letters.push(letterGuess);
+                correctBox(letterGuess);
+                incorrectBox(letterGuess);
+                triesLeft();
+                winLoss();
+            }
+            return false;
+        },
+        correctBox: function() {
+
+        },
+        incorrectBox: function() {
+
+        },
+        winLoss: function() {
+
+        },
+        gallows: function() {
+
+        },
+        triesLeft: function() {
+
+        },
     },
     get: {
-        all: console.log('I will log gameState.value')
-    }
+        guess: function(){
+
+        },
+        all: console.log('I will log gameState.value'),
+    },
+
 };
-
-
-
-function startGame(action){
-    switch(action){
-        case 'start':
-            randomWordCreator();
-            triesLeft();
-
-            elementControl('startArea', 'hide');
-            elementControl('gameArea', 'show');
-            
-            break;
-        case 'reset':
-            gameState.set.elements;    
-            gameState.set.vars;
-
-            elementControl('buttonControl', 'show');
-            elementControl('gameArea', 'hide');
-            elementControl('startArea', 'show');
-
-            console.log(`on reset: word is ${word}, correctLetters is ${correctLetters}, incorrectLetters is ${incorrectLetters}, wordArray is ${wordArray}, lettersGuessed is ${lettersGuessed}`);
-            
-            break;
-
-        default:
-            console.log('startGame must have an action argument');
-    }
-}
 
 function elementControl(element, action){
     switch(element) {
@@ -144,40 +190,16 @@ function elementControl(element, action){
 }
 
 function randomWordCreator(){
-    var arrayLength = wordList.length;
-    var randomIndex = Math.floor(Math.random() * arrayLength);
-    word = wordList[randomIndex];
-    wordArray = word.split('');
-    wordSpaceCreator();
-    console.log('The new word is:', word);   
+ 
 }
 
 function wordSpaceCreator() {
-    var wordSpace = '';
-    for(var i = 0; i < word.length; i++) {
-        wordSpace += `<td id="letter-${i}" class="letter-space"></td> <td class="spacer"></td>`;
-    }
-    document.getElementById('word-space').innerHTML = wordSpace;
+
 }
 
-function submitGuess() {
-    var letterGuess = document.getElementById('guess').value.toLowerCase();
-    console.log('Their guess was: ', letterGuess);
 
-    document.getElementById('guess').value = '';
+function guessHandler() {
 
-    if(lettersGuessed.includes(letterGuess)) {
-        alert('You have already guessed that letter. Please try again.');
-    } 
-    else {
-        lettersGuessed.push(letterGuess);
-        correctBox(letterGuess);
-        incorrectBox(letterGuess);
-        triesLeft();
-        winLoss();
-    }
-    
-    return false;
 }
 
 function correctBox(letterGuess) {
