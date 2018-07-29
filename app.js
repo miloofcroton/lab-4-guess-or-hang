@@ -81,8 +81,15 @@ function triesLeft() {
 }
 
 function gallows() {
-    var imageNumber = incorrectLetters + 4;
-    document.getElementById('gallows').innerHTML = '<img src="https://www.oligalma.com/downloads/images/hangman/files/' + imageNumber + '.jpg">';
+    var imageNumber = incorrectLetters + 1;
+    var gallowImage;
+    if(incorrectLetters === 6){
+        gallowImage = '<img src="https://i.imgur.com/N7NJHRK.gif">';
+    }
+    else {
+        gallowImage = '<img src="/assets/' + imageNumber + '.jpg">';
+    }
+    document.getElementById('gallows').innerHTML = gallowImage;
 }
 function winLoss() {
     
