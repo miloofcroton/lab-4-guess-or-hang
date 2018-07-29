@@ -17,7 +17,7 @@
 
         <p id="welcome-message">Welcome! To play hangman, press the start button below.</p>
 
-        <p><button onclick="return startGame()">Start the game</button></p>
+        <p><button onclick="return startGame('start')">Start the game</button></p>
 
     </div>
 
@@ -32,10 +32,10 @@
             </tbody>
         </table> 
         
-        <form id="letter-guess" onsubmit="return submitGuess()" onreset="return resetGame()">
+        <form id="letter-guess" onsubmit="return submitGuess()" onreset="return startGame('reset')">
             <label>
                 <legend>Guess any letter that you haven't guessed yet!</legend>
-                <input id="guess" name="guess" maxlength="1" pattern="[a-zA-Z]" placeholder="..." require>
+                <input id="guess" name="guess" maxlength="1" pattern="^[a-zA-Z]$" placeholder="..." required>
             </label>
             <button type="submit" id="submit-button">Guess</button>
             <button type="reset" id="reset-button">Reset Game</button>
