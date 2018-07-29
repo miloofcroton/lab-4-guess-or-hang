@@ -81,14 +81,7 @@ function triesLeft() {
 }
 
 function gallows() {
-    var imageNumber = incorrectLetters + 1;
-    var gallowImage;
-    if(incorrectLetters === 6){
-        gallowImage = '<img src="https://i.imgur.com/N7NJHRK.gif">';
-    }
-    else {
-        gallowImage = '<img src="/assets/' + imageNumber + '.jpg">';
-    }
+    var gallowImage = '<img src="/assets/' + (incorrectLetters + 1) + '.jpg">';
     document.getElementById('gallows').innerHTML = gallowImage;
 }
 function winLoss() {
