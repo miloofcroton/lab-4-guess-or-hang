@@ -68,11 +68,11 @@ button {
 }
 
 button:hover {
-    background: rgb(238, 97, 41);
+    background: #f2ce19;
 }
 
 input {
-    border: 3px solid rgb(238, 97, 41);
+    border: 3px solid #f2ce19;
     background-color: rgb(252, 245, 232); 
     padding: 15px;
     margin: 0 0 10px 0;
