@@ -134,7 +134,7 @@ function resetGame() {
 
     console.log('reset working');
 
-    for(var i = 0; i <= incorrectLetters; i++) {
+    for(var i = 0; i < 7; i++) {
         document.getElementById('guess-' + i).innerText = '';
     }
 
