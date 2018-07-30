@@ -11,55 +11,109 @@ var guessesLeft; //gameState.guesses.number.remainingGuesses
 var lettersGuessed = []; //gameState.guesses.letters
 
 var submitButton = document.getElementById('submit-button'); //gameState.elements.submitButton
-var resetButton = document.getElementById('reset-button'); 
+var resetButton = document.getElementById('reset-button');
 
 
 
 var gameState = {
 
+
+
     value: {
         word: {
-            asString: '',
-            asCharArray: [],
+            string: {
+                state: '',
+                create: function() {
+                    var arrayLength = wordList.length;
+                    var randomIndex = Math.floor(Math.random() * arrayLength);
+                    gameState.value.word.asString = wordList[randomIndex];
+                    gameState.value.word.asCharArray = gameState.value.word.asString.split('');
+                    gameState.set.wordSpace();
+                    console.log('The new word is:', word);
+                }
+            },
+            array: {
+                state: [],
+            },
         },
         guesses: {
             number: {
-                incorrectGuesses: 3,
-                correctGuesses: 5,
-                totalGuesses: correctLetters + incorrectLetters,
-                remainingGuesses: 7 - incorrectLetters,
+                state: {
+                    incorret: {
+                        state: 3,
+                    },
+                    correct: {
+                        state: 5,
+                    },
+                    total: {
+                        state: correctLetters + incorrectLetters,
+                    },
+                    remaining: {
+                        state: 7 - incorrectLetters,
+                    },
+                },
             },
-            letters: [],
+            letter: {
+                current: '',
+                total: [],
+            },
         },
         game: {
-            intial: true,
-            midGame: false,
-            victory: false,
-            loss: false,
+            result: {
+                victory: false,
+                loss: false,
+            },
         },
         elements: {
-            gallowsImage: '',
-            submitButton: document.getElementById('submit-button'),
-            resetButton: document.getElementById('reset-button'),
-        }
+            gallows: {
+                image: '',
+                html: document.getElementById('gallows').innerHTML,
+            },
+            results: {
+                html: document.getElementById('results').innerText,
+            },
+            submitButton: {
+                html: document.getElementById('submit-button'),
+            },
+            resetButton: {
+                html: document.getElementById('reset-button'),
+            },
+            guessBox: {
+                html: function(id) {
+                    document.getElementById('guess-' + id).innerText = '';
+                },
+            },
+            wordSpace: {
+                html: document.getElementById('word-space').innerHTML,
+                create: function() {
+                    var wordSpace = '';
+                    for (var i = 0; i < word.length; i++) {
+                        wordSpace += `<td id="letter-${i}" class="letter-space"></td> <td class="spacer"></td>`;
+                    };
+                },
+            }
+        },
     },
-    start: function() {
-        gameState.set.word();
 
-        triesLeft();
-        
-        elementControl('startArea', 'hide');
-        elementControl('gameArea', 'show');
-    },
-    restart: function() {
-        gameState.reset.elements;
-        gameState.reset.vars;
+    god: {
+        start: function() {
+            gameState.set.word();
 
-        elementControl('buttonControl', 'show');
-        elementControl('gameArea', 'hide');
-        elementControl('startArea', 'show');
+            triesLeft();
 
-        console.log(`on reset: word is ${word}, correctLetters is ${correctLetters}, incorrectLetters is ${incorrectLetters}, wordArray is ${wordArray}, lettersGuessed is ${lettersGuessed}`);
+            elementControl('startArea', 'hide');
+            elementControl('gameArea', 'show');
+        },
+        restart: function() {
+            gameState.reset.elements;
+            gameState.reset.vars;
+
+            elementControl('buttonControl', 'show');
+            elementControl('gameArea', 'hide');
+            elementControl('startArea', 'show');
+
+            console.log(`on reset: word is ${word}, correctLetters is ${correctLetters}, incorrectLetters is ${incorrectLetters}, wordArray is ${wordArray}, lettersGuessed is ${lettersGuessed}`);
+        },
     },
 
     reset: {
@@ -82,24 +136,9 @@ var gameState = {
         },
     },
     set: {
-        word: function() {
-            var arrayLength = wordList.length;
-            var randomIndex = Math.floor(Math.random() * arrayLength);
-            gameState.value.word.asString = wordList[randomIndex];
-            gameState.value.word.asCharArray = gameState.value.word.asString.split('');
-            gameState.set.wordSpace();
-            console.log('The new word is:', word);
-        },
-        wordSpace: function() {
-            var wordSpace = '';
-            for(var i = 0; i < word.length; i++) {
-                wordSpace += `<td id="letter-${i}" class="letter-space"></td> <td class="spacer"></td>`;
-            }
-            document.getElementById('word-space').innerHTML = wordSpace;
-        },
-        guess: function() {
-            var letterGuess = document.getElementById('guess').value.toLowerCase();
-            console.log('Their guess was: ', letterGuess);
+
+        guess: function(letterGuess) {
+            gameState.get.guess();
             gameState.reset.guess();
 
             if(gameState.value.guesses.letters.includes(letterGuess)) {
@@ -114,32 +153,64 @@ var gameState = {
             }
             return false;
         },
-        correctBox: function() {
+        correctBox: function(letterGuess) {
+            for(var i = 0; i < word.length; i++) {
 
+                if(letterGuess === wordArray[i]) {
+                    document.getElementById('letter-' + i).innerText = letterGuess;
+                    correctLetters++;
+                }
+            }
         },
-        incorrectBox: function() {
-
+        incorrectBox: function(letterGuess) {
+            if(wordArray.indexOf(letterGuess) === -1) {
+                document.getElementById('guess-' + incorrectLetters).innerText = letterGuess;
+                gallows();
+                incorrectLetters++;
+            }
         },
         winLoss: function() {
 
+            if(correctLetters === wordArray.length) {
+                document.getElementById('results').innerText = 'You won!';
+                document.getElementById('guesses-left').innerText = '';
+
+                elementControl('buttonControl', 'hide');
+            }
+
+            if(incorrectLetters > 6) {
+                document.getElementById('results').innerText = 'You lost!';
+                document.getElementById('guesses-left').innerText = '';
+
+                elementControl('buttonControl', 'hide');
+            }
         },
         gallows: function() {
-
+            var gallowImage = '<img src="/assets/' + (incorrectLetters + 1) + '.jpg">';
+            document.getElementById('gallows').innerHTML = gallowImage;
         },
         triesLeft: function() {
-
+            guessesLeft = 7 - incorrectLetters;
+            if(guessesLeft > 1) {
+                document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} more mistakes, the man hangs.`;
+            }
+            else {
+                document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} more mistake, the man hangs.`;
+            }
         },
     },
     get: {
-        guess: function(){
-
+        guess: function() {
+            gameState.value.guesses.letter.current = document.getElementById('guess').value.toLowerCase();
+            console.log('Their guess was: ', letterGuess);
         },
         all: console.log('I will log gameState.value'),
     },
 
 };
 
-function elementControl(element, action){
+
+function elementControl(element, action) {
     switch(element) {
         case 'startArea':
             switch(action) {
@@ -189,8 +260,8 @@ function elementControl(element, action){
     }
 }
 
-function randomWordCreator(){
- 
+function randomWordCreator() {
+
 }
 
 function wordSpaceCreator() {
@@ -203,52 +274,22 @@ function guessHandler() {
 }
 
 function correctBox(letterGuess) {
-    for(var i = 0; i < word.length; i++){
-        
-        if(letterGuess === wordArray[i]){
-            document.getElementById('letter-' + i).innerText = letterGuess;
-            correctLetters ++;
-        }
-    }
+
 }
 
 function incorrectBox(letterGuess) {
-    if(wordArray.indexOf(letterGuess) === -1) {
-        document.getElementById('guess-' + incorrectLetters).innerText = letterGuess;
-        gallows();
-        incorrectLetters ++;
-    }
+
 }
 
 function triesLeft() {
-    guessesLeft = 7 - incorrectLetters;
-    if(guessesLeft > 1) {
-        document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} more mistakes, the man hangs.`;
-    }
-    else {
-        document.getElementById('guesses-left').innerText = `If you make ${guessesLeft} more mistake, the man hangs.`;
-    }
+
 }
 
 function gallows() {
-    var gallowImage = '<img src="/assets/' + (incorrectLetters + 1) + '.jpg">';
-    document.getElementById('gallows').innerHTML = gallowImage;
+
 }
 
 function winLoss() {
-    
-    if(correctLetters === wordArray.length){
-        document.getElementById('results').innerText = 'You won!';
-        document.getElementById('guesses-left').innerText = '';
 
-        elementControl('buttonControl', 'hide');
-    }
-    
-    if(incorrectLetters > 6){
-        document.getElementById('results').innerText = 'You lost!';
-        document.getElementById('guesses-left').innerText = '';
-
-        elementControl('buttonControl', 'hide');
-    }
 
 }

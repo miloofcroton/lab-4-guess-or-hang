@@ -32,7 +32,9 @@
             </tbody>
         </table> 
         
-        <form id="letter-guess" onsubmit="return gameState.set.guess()" onreset="return gameState.restart()">
+        <form id="letter-guess" 
+            onsubmit="return gameState.set.guess()"
+            onreset="return gameState.restart()">
             <label>
                 <legend>Guess any letter that you haven't guessed yet!</legend>
                 <input id="guess" name="guess" maxlength="1" pattern="^[a-zA-Z]$" placeholder="..." required>
