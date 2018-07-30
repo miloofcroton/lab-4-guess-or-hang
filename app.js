@@ -45,7 +45,7 @@ function submitGuess() {
     var letterGuess = document.getElementById('guess').value.toLowerCase();
     console.log('Their guess was: ', letterGuess);
 
-    document.getElementById("guess").value = "";
+    document.getElementById('guess').value = '';
 
     if(lettersGuessed.includes(letterGuess)) {
         alert('You have already guessed that letter. Please try again.');
