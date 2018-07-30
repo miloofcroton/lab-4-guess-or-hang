@@ -5,10 +5,10 @@
 
 
 var word; 
+var wordArray;
 
 var correctLetters = 0;
 var incorrectLetters = 0;
-var wordArray;
 
 var guessesLeft;
 var lettersGuessed = [];
@@ -17,14 +17,14 @@ var submitButton = document.getElementById('submit-button');
 var resetButton = document.getElementById('reset-button');
 
 
-function startGame(){
+function startGame() {
     randomWordCreator();
     document.getElementById('game-area').style.visibility = 'visible';
     triesLeft();
     startAreaHidden();
 }
 
-function randomWordCreator(){
+function randomWordCreator() {
     var arrayLength = wordList.length;
     var randomIndex = Math.floor(Math.random() * arrayLength);
     word = wordList[randomIndex];
